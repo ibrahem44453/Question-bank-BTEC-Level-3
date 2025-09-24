@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>بنك أسئلة - كتاب تكنولوجيا المعلومات (Pearson BTEC L3)</title>
+  <style>
+a {
+  text-decoration: none;
+  color: #e6eef6;
+  border-color: #9fe3ff; 
+  font-size: 15px; 
+  transition: transform 0.3s, text-shadow 0.3s, font-size 0.3s,font-weight 0.3s;
+}
+a:hover { 
+  text-shadow: 0 0 1px #ffffff; 
+  transform: scale(1.1);         
+  font-size: 16px; 
+  font-weight: bold;
+}
+:root{--bg:#0f1724;--card:#0b1220;--accent:#06b6d4;--muted:#94a3b8;color-scheme:dark}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,"Noto Naskh Arabic",Arial; background:linear-gradient(180deg,#071024 0%,#071a2a 100%);color:#e6eef6;margin:0;padding:24px;direction:rtl;text-align:right}
+.container{max-width:1100px;margin:0 auto}
+h1{font-size:22px;margin:0}
+p.lead{margin:6px 0 18px;color:var(--muted)}
+.controls{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+input[type=search]{flex:1;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:inherit;direction:ltr;text-align:left}
+button{padding:10px;border-radius:10px;border:none;background:var(--card);color:inherit;cursor:pointer}
+.grid{display:grid;grid-template-columns:1fr;gap:18px} /* عمود واحد لتسهيل ترتيب الفئات فوق */
+.card{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(0,0,0,0.12));padding:16px;border-radius:12px;box-shadow:0 6px 20px rgba(2,6,23,0.6)}
+ul.questions, ul.categories{list-style:none;padding:0;margin:0}
+li.q, li.category{padding:10px;border-radius:8px;margin-bottom:8px;border:1px solid rgba(255,255,255,0.03)}
+.meta{font-size:12px;color:var(--muted);margin-top:6px}
+.extra{font-size:12px;color:#9fe3ff;margin-top:4px}
+.more{display:none;margin-top:6px;color:#9fe3ff;} /* اللون للوضع الداكن */
+body.light-theme .more{color: rgba(0,0,0,0.6);} /* الوضع الفاتح */
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.tag{padding:6px 8px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:12px}
+.help{font-size:13px;color:var(--muted)}
+.highlight{background:#ffe36b;color:#000;padding:0 2px;border-radius:2px}
+.toggle-btn{cursor:pointer;display:inline-block;margin-left:8px;color:var(--accent)}
+footer{margin-top:18px;color:var(--muted);font-size:13px}
+
+.category-btn{margin-bottom:8px;width:100%;text-align:right;padding:8px;border-radius:8px;border:none;background:var(--card);color:inherit;cursor:pointer}
+.category-btn.active{background:var(--accent);color:#000}
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;           
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  background: var(--card);
+  border-bottom: 2px solid #333;
+  border-radius: 12px;   
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.site-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: var(--text);
+  margin: 0;
+}
+.header-icons {
+  font-size: 22px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.header-icons:hover {
+  transform: rotate(30deg);
+}
+
+#settingsSlide {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 300px;
+  max-width: 80vw;       
+  height: 100%;
+  background: rgba(11, 18, 32, 0.95); 
+  box-shadow: -4px 0 20px rgba(0,0,0,0.6);
+  z-index: 1002;
+  padding: 20px;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 0.5s ease, opacity 0.5s ease;
+  border-radius: 12px 0 0 12px; 
+}
+
+#toggleTheme {
+  background: linear-gradient(90deg, #06b6d4, #3b82f6);
+  border: none;
+  color: #d8d1d1;
+  padding: 10px 16px;
+  border-radius: 25px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+#toggleTheme:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+  background: linear-gradient(90deg, #3b82f6, #06b6d4);
+  color: #fff;
+}
+#toggleTheme:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+}
+
+:root {
+  --bg: #0f1724;
+  --card: #0b1220;
+  --accent: #06b6d4;
+  --muted: #94a3b8;
+  --text: #e6eef6;
+  color-scheme: dark;
+}
+body {
+  background: linear-gradient(180deg,#071024 0%,#071a2a 100%);
+  color: var(--text);
+}
+body.light-theme {
+  --bg: #f0f4f8;
+  --card: #ffffff;
+  --accent: #06b6d4;
+  --muted: #475569;
+  --text: #0f1724;
+  color-scheme: light;
+  background: linear-gradient(180deg,#ffffff 0%,#e2e8f0 100%);
+}
+body.light-theme .card {
+  background: linear-gradient(180deg, rgba(0,0,0,0.02), rgba(255,255,255,0.12));
+}
+  </style>
+</head>
+<body>
+  <div class="container">
+    
+    <!-- الهيدر الجديد -->
+    <div class="header">
+      <h1 class="site-title">بنك أسئلة - Pearson BTEC L3</h1>
+      <div class="header-icons" id="openSettings">⚙️</div>
+    </div>
+
+    <header>
+      <div>
+        <h1> Information bank-(Pearson BTEC Level 3)</h1>
+        <p class="lead">مصطلحات شاملة لجميع الوحد</p>
+      </div>
+    </header>
+
+    <div class="controls">
+      <input id="search" type="search" placeholder="search..." />
+      <button id="export">طباعة / حفظ PDF</button>
+    </div>
+
+    <!-- ترتيب جديد: الفئات فوق العنوان -->
+    <div class="grid">
+      <aside class="card">
+        <h3>الفئات</h3>
+        <div id="categories"></div>
+      </aside>
+
+      <main class="card">
+        <h2 id="categoryTitle">الأمن السيبراني وإدارة الحوادث</h2>
+        <ul id="qList" class="questions"></ul>
+      </main>
+    </div>
+
+    <footer>
+      <p><a href="">المصدر</a></p>
+    </footer>
+  </div>
+<button class="aiBtn">اسأل AI</button>
+<div class="aiAnswer"></div>
+
+  <!-- سلايد الإعدادات -->
+  <div id="settingsSlide">
+    <button id="toggleTheme" style="margin-top:20px;">تبديل الوضع</button>
+  </div>
+
+  <script>
+    const ALL_ITEMS = [
+  {id:44,cat:'ادارت مشاريع تكنلوجيا المعلومات',q:'',page:[133],more:''},
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    ];
+
+    const qList = document.getElementById('qList');
+    const search = document.getElementById('search');
+    const categoriesDiv = document.getElementById('categories');
+    const categoryTitle = document.getElementById('categoryTitle');
+
+    const CATEGORIES = [...new Set(ALL_ITEMS.map(i=>i.cat))];
+
+    // إنشاء أزرار الفئات
+    CATEGORIES.forEach(cat=>{
+      const btn = document.createElement('button');
+      btn.className='category-btn';
+      btn.innerText = cat;
+      btn.addEventListener('click', ()=>{
+        document.querySelectorAll('.category-btn').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+        categoryTitle.innerText = cat;
+        render(ALL_ITEMS.filter(i=>i.cat===cat));
+      });
+      categoriesDiv.appendChild(btn);
+    });
+
+    function highlightText(text, term){
+      if(!term) return text;
+      const re = new RegExp(`(${term})`, 'gi');
+      return text.replace(re, '<span class="highlight">$1</span>');
+    }
+
+    function render(list){
+      qList.innerHTML = '';
+      if(list.length===0){ qList.innerHTML = '<li class="q">لا توجد نتائج.</li>'; return }
+
+      list.forEach(item=>{
+        const li = document.createElement('li'); 
+        li.className='q';
+
+        const pages = Array.isArray(item.page) ? item.page.join(', ') : item.page;
+        let html = `${highlightText(item.q, search.value)} <div class="meta">صفحة ${pages}</div>`;
+        html += `<div class="more">${item.more}</div>`;
+
+        const toggle = document.createElement('span');
+        toggle.innerHTML = '▼';
+        toggle.className='toggle-btn';
+        toggle.addEventListener('click', ()=>{
+          const more = li.querySelector('.more');
+          more.style.display = more.style.display==='none'?'block':'none';
+        });
+
+        li.innerHTML = html;
+        li.appendChild(toggle);
+        qList.appendChild(li);
+      });
+    }
+
+    render(ALL_ITEMS);
+
+    search.addEventListener('input', ()=>{
+      const term = search.value.trim();
+      const filtered = ALL_ITEMS.filter(i=>i.q.includes(term) || i.more.includes(term) || i.cat.includes(term));
+      render(filtered);
+    });
+
+    // السلايد والإعدادات
+    const openSettings = document.getElementById('openSettings');
+    const settingsSlide = document.getElementById('settingsSlide');
+
+    openSettings.addEventListener('click', ()=>{
+        settingsSlide.style.transform = 'translateX(0)';
+        settingsSlide.style.opacity = '1';
+    });
+
+    document.addEventListener('click', (e)=>{
+      if(!settingsSlide.contains(e.target) && e.target !== openSettings){
+        settingsSlide.style.transform = 'translateX(100%)';
+        settingsSlide.style.opacity = '0';
+      }
+    });
+
+    const toggleThemeBtn = document.getElementById('toggleTheme');
+    toggleThemeBtn.addEventListener('click', () => {
+      document.body.classList.toggle('light-theme');
+    });
+ const aiBtn = document.querySelector('.aiBtn');
+const aiAnswer = document.querySelector('.aiAnswer');
+
+aiBtn.addEventListener('click', async () => {
+  const question = prompt("اكتب سؤالك للـ AI:");
+  if (!question) return;
+
+  aiAnswer.textContent = "جارٍ التفكير...";
+
+  try {
+    const response = await fetch("https://api.openai.com/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer sk-..." // ضع هنا مفتاحك الصحيح
+      },
+      body: JSON.stringify({
+        model: "gpt-3.5-turbo",
+        messages: [{role:"user", content: question}],
+        max_tokens: 200
+      })
+    });
+
+    const data = await response.json();
+    aiAnswer.textContent = data.choices[0].message.content;
+  } catch (err) {
+    aiAnswer.textContent = "حدث خطأ أثناء الاتصال بالـ AI.";
+    console.error(err);
+  }
+});
+
+  </script>
+</body>
+</html>
